@@ -1,0 +1,105 @@
+@import "tailwindcss";
+
+@theme {
+  --color-paper: #f7f6f4;
+  --color-ink: #111214;
+  --color-mist: #d5e4f2;
+  --color-sand: #f0ddd0;
+  --color-sage: #dce8dc;
+  --font-sans: "Geist", ui-sans-serif, system-ui, sans-serif;
+  --radius-pill: 999px;
+}
+
+@layer base {
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  html,
+  body {
+    height: 100%;
+    margin: 0;
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+  }
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.stage {
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  position: relative;
+  background: var(--color-paper);
+}
+
+.stage canvas {
+  width: min(100vw, 100dvh);
+  height: min(100vw, 100dvh);
+  display: block;
+  background: var(--color-paper);
+}
+
+.progress {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: color-mix(in srgb, var(--color-ink) 12%, transparent);
+  pointer-events: none;
+}
+
+.progress span {
+  display: block;
+  height: 100%;
+  width: calc(var(--p, 0) * 100%);
+  background: var(--color-ink);
+  opacity: 0.45;
+}
+
+.replay {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  min-height: 44px;
+  padding: 0 22px;
+  border: 1px solid color-mix(in srgb, var(--color-ink) 18%, transparent);
+  border-radius: var(--radius-pill);
+  background: color-mix(in srgb, var(--color-paper) 88%, white);
+  color: var(--color-ink);
+  font: 500 15px/1 var(--font-sans);
+  letter-spacing: 0.01em;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.34s ease;
+}
+
+.replay.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.boot {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font: 600 42px/1 var(--font-sans);
+  letter-spacing: -0.03em;
+  color: var(--color-ink);
+}
